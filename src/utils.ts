@@ -9,6 +9,7 @@ import type {
 import type {TagCache, TFile, Plugin, ReferenceCache} from 'obsidian';
 import {MetadataCache, parseFrontMatterStringArray, parseFrontMatterTags} from 'obsidian';
 import {ITypedLink, ITypedLinkProperties} from '../index';
+import * as path from 'path';
 
 const CAT_DANGLING = 'dangling';
 const CORE_STORE_ID = 'core';
@@ -45,7 +46,7 @@ export class VizId {
     }
 
     static fromFile(file: TFile): VizId {
-      return new VizId(file.name, 'core');
+      return new VizId(file.path, 'core');
     }
 
     static toId(id: string, storeId: string) : string {
@@ -119,7 +120,7 @@ export const getClasses = function(file: TFile, metadataCache: MetadataCache): s
 
 export const nodeFromFile = async function(file: TFile, plugin: Plugin) : Promise<NodeDefinition> {
   const cache = plugin.app.metadataCache.getFileCache(file);
-  const name = file.extension === 'md' ? file.basename : file.name;
+  const name = file.extension === 'md' ? path.basename(file.path) : file.path;
   const classes = getClasses(file, plugin.app.metadataCache).join(' ');
   const data = {
     id: VizId.toId(file.name, CORE_STORE_ID),
