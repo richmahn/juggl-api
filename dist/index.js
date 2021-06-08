@@ -129,7 +129,7 @@
         const name = file.extension === 'md' ? path__namespace.basename(file.path) : file.path;
         const classes = getClasses(file, plugin.app.metadataCache).join(' ');
         const data = {
-            id: VizId.toId(file.name, CORE_STORE_ID),
+            id: VizId.toId(file.path, CORE_STORE_ID),
             name: name,
             path: file.path,
         };
