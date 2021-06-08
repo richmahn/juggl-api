@@ -120,7 +120,7 @@ export const getClasses = function(file: TFile, metadataCache: MetadataCache): s
 
 export const nodeFromFile = async function(file: TFile, plugin: Plugin) : Promise<NodeDefinition> {
   const cache = plugin.app.metadataCache.getFileCache(file);
-  const name = file.extension === 'md' ? path.basename(file.path) : file.path;
+  const name = file.path;
   const classes = getClasses(file, plugin.app.metadataCache).join(' ');
   const data = {
     id: VizId.toId(file.path, CORE_STORE_ID),
