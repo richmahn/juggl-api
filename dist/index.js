@@ -1,30 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('obsidian'), require('path')) :
-    typeof define === 'function' && define.amd ? define(['exports', 'obsidian', 'path'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global['juggl-api'] = {}, global.obsidian, global.path));
-}(this, (function (exports, obsidian, path) { 'use strict';
-
-    function _interopNamespace(e) {
-        if (e && e.__esModule) return e;
-        var n = Object.create(null);
-        if (e) {
-            Object.keys(e).forEach(function (k) {
-                if (k !== 'default') {
-                    var d = Object.getOwnPropertyDescriptor(e, k);
-                    Object.defineProperty(n, k, d.get ? d : {
-                        enumerable: true,
-                        get: function () {
-                            return e[k];
-                        }
-                    });
-                }
-            });
-        }
-        n['default'] = e;
-        return Object.freeze(n);
-    }
-
-    var path__namespace = /*#__PURE__*/_interopNamespace(path);
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('obsidian')) :
+    typeof define === 'function' && define.amd ? define(['exports', 'obsidian'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global['juggl-api'] = {}, global.obsidian));
+}(this, (function (exports, obsidian) { 'use strict';
 
     const CAT_DANGLING = 'dangling';
     const CORE_STORE_ID = 'core';
@@ -126,7 +104,7 @@
     };
     const nodeFromFile = async function (file, plugin) {
         const cache = plugin.app.metadataCache.getFileCache(file);
-        const name = file.extension === 'md' ? path__namespace.basename(file.path) : file.path;
+        const name = file.path;
         const classes = getClasses(file, plugin.app.metadataCache).join(' ');
         const data = {
             id: VizId.toId(file.path, CORE_STORE_ID),
